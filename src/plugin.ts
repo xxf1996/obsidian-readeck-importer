@@ -209,7 +209,8 @@ export default class RDPlugin extends Plugin {
 	}
 
 	async addBookmarkMD(bookmarkId: string, bookmarkTitle: string, bookmarkContent: string | null, bookmarkAnnotations: Annotation[], bookmarkFolderPath?: string) {
-		const filePath = `${bookmarkFolderPath}/${Utils.sanitizeFileName(bookmarkTitle)}.md`;
+		const sanitizedTitle = Utils.sanitizeFileName(bookmarkTitle, this.settings.sanitizeFilename, this.settings.sanitizeReplacement);
+		const filePath = `${bookmarkFolderPath}/${sanitizedTitle}.md`;
 		let noteContent = bookmarkContent || '';
 		if (bookmarkAnnotations.length > 0) {
 			const annotations = this.buildAnnotations(bookmarkId, bookmarkAnnotations);
@@ -244,7 +245,8 @@ export default class RDPlugin extends Plugin {
 	}
 
 	async addBookmarkAnnotations(bookmark: any, bookmarkMetadata: any, annotationsData: any) {
-		const filePath = `${this.settings.folder}/${Utils.sanitizeFileName(bookmark.title)}.md`;
+		const sanitizedTitle = Utils.sanitizeFileName(bookmark.title, this.settings.sanitizeFilename, this.settings.sanitizeReplacement);
+		const filePath = `${this.settings.folder}/${sanitizedTitle}.md`;
 		const annotations = this.buildAnnotations(bookmark, annotationsData);
 		const metadataAnnotations = `---\n${bookmarkMetadata}---\n${annotations}`;
 		await this.createFile(bookmark, filePath, metadataAnnotations);

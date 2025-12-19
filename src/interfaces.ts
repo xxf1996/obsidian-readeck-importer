@@ -10,6 +10,8 @@ export interface ReadeckPluginSettings {
 	mode: string;
 	metadataFields: string[];
 	autoSyncMetadata: boolean;
+	sanitizeFilename: boolean;
+	sanitizeReplacement: string;
 }
 
 export interface Response<T> {
@@ -125,4 +127,6 @@ export const DEFAULT_SETTINGS: ReadeckPluginSettings = {
 	mode: "text",
 	metadataFields: ['title', 'url', 'labels', 'cover'],
 	autoSyncMetadata: false,
+	sanitizeFilename: true,
+	sanitizeReplacement: "_",
 }

@@ -162,6 +162,26 @@ export class RDSettingTab extends PluginSettingTab {
 					})
 			});
 
+		new Setting(containerEl)
+			.setName('Sanitize filename')
+			.setDesc('Replace Obsidian-unsafe characters (# ^ [ ] |) in filenames')
+			.addToggle(toggle => toggle.setValue(this.plugin.settings.sanitizeFilename)
+				.onChange(async (value) => {
+					this.plugin.settings.sanitizeFilename = value;
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Sanitize replacement character')
+			.setDesc('Character to replace unsafe characters with')
+			.addText(text => text
+				.setPlaceholder('_')
+				.setValue(this.plugin.settings.sanitizeReplacement)
+				.onChange(async (value) => {
+					this.plugin.settings.sanitizeReplacement = value || '_';
+					await this.plugin.saveSettings();
+				}));
+
 		// Metadata fields multi-select configuration
 		containerEl.createEl('h3', { text: 'Metadata Sync Settings' });
 
