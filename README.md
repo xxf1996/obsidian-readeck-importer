@@ -29,6 +29,8 @@ The plugin provides the following configurable options:
   - **Text + Annotations**: Save text and annotations.  
   - **Text + Images + Annotations**: Save text, images, and annotations.  
   - **Annotations**: Save the annotations.
+- **Sanitize filename**: Replace Obsidian-unsafe characters (`# ^ [ ] |`) in filenames (enabled by default).
+- **Sanitize replacement character**: Character to replace unsafe characters with (default: `_`).
 
 ### Metadata Sync Settings
 - **Auto sync metadata after bookmark sync**: Automatically sync metadata to frontmatter after syncing bookmarks.
